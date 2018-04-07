@@ -1,4 +1,5 @@
-﻿using FanSoftStore.UI.Models;
+﻿using FanSoftStore.UI.Data;
+using FanSoftStore.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,12 @@ namespace FanSoftStore.UI.Controllers
 {
     public class ProdutosController : Controller
     {
+        private readonly DataContext _dataContext = new DataContext();
+
         public IActionResult Index()
         {
-            var model = new List<ProdutoModel>()
-            {
-                new ProdutoModel(){Nome = "Picanha", Tipo = "Alimento", Valor = 80.90},
-                new ProdutoModel(){Nome = "Paste de Dente", Tipo = "Higiene", Valor = 2.90},
-                new ProdutoModel(){Nome = "Leite", Tipo = "Alimento", Valor = 1.90}
-            };
-
+            //LIST DATA TO DATABASE IN TABLE "PRODUTOS"
+            var model = _dataContext.Produtos.ToList();
             return View(model);
         }
     }

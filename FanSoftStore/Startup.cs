@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FanSoftStore.UI.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -22,9 +23,13 @@ namespace FanSoftStore
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline..
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            //VERIFIED IF YOU ARE IN DEBUG LOCALHOST MODE
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                //VERIFIED AND CREATE A DATABASE
+                DbInitializer.InitDb(new DataContext());
             }
 
             //DICIONA A ROTA PADRÃO DO SISTEMA
