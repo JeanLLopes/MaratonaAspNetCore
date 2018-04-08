@@ -18,10 +18,22 @@ namespace FanSoftStore
         {
             //ADICIONA O PIPELINE DO MVC 
             services.AddMvc();
+
+            //ADD INJECTION DEPENDENCY
+
+            //NATIVE DEPENDENCY INJECTION
+            //services.AddSingleton()
+
+            //DEPENDENCY INJECTION, ESTANCIA UNICA É GERADO UM NOVO PARA CADA REQUEST
+            services.AddScoped<DataContext>();
+
+            
+            //CADA VEZ QUE NECESSARIO SOBRE UM NOVA INSTANCIA
+            //services.AddTransient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline..
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DataContext ctx)
         {
             //VERIFIED IF YOU ARE IN DEBUG LOCALHOST MODE
             if (env.IsDevelopment())
@@ -29,7 +41,7 @@ namespace FanSoftStore
                 app.UseDeveloperExceptionPage();
 
                 //VERIFIED AND CREATE A DATABASE
-                DbInitializer.InitDb(new DataContext());
+                DbInitializer.InitDb(ctx);
             }
 
             //DICIONA A ROTA PADRÃO DO SISTEMA

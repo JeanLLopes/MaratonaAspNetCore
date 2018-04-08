@@ -11,7 +11,12 @@ namespace FanSoftStore.UI.Controllers
 {
     public class ProdutosController : Controller
     {
-        private readonly DataContext _dataContext = new DataContext();
+        private readonly DataContext _dataContext;
+
+        public ProdutosController(DataContext dataContext)
+        {
+            _dataContext = dataContext;
+        }
 
         public IActionResult Index()
         {
