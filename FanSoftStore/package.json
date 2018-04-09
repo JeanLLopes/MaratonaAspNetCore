@@ -3,6 +3,8 @@
   "name": "fansoftstore",
   "private": true,
   "devDependencies": {
+    "bootstrap": "4.0.0",
+    "jquery": "3.3.1"
   },
   "description": "A example soluction with asp.net core",
   "author": "Jean Lopes",
