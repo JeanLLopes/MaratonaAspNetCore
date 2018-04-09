@@ -26,5 +26,20 @@ namespace FanSoftStore.UI.Controllers
             var model = _dataContext.Produtos.Include(x => x.Tipo).ToList();
             return View(model);
         }
+
+        public IActionResult AddEdit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddEdit(ProdutoModel produtoModel)
+        {
+            //ADD IN DATABASE
+            _dataContext.Add(produtoModel);
+            _dataContext.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }

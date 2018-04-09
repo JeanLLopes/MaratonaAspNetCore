@@ -4,7 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>@ViewBag.Title</h2>
-
+<br />
+<a href="@Url.Action("AddEdit")" class="btn btn-primary">Adicionar Novo Produto</a>
+<br />
+<hr />
+<br />
 <table class="table table-hover"> 
     <thead>
         <tr>
@@ -24,7 +28,7 @@
             <tr>
                 <td>@item.Nome</td>
                 <td>@item.Tipo.Nome</td>
-                <td>@item.Valor</td>
+                <td>@item.Valor.ToString("N2")</td>
             </tr>
 
         }
