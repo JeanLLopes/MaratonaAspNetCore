@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FanSoftStore.UI.Data;
+using FanSoftStore.UI.Infra;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -48,9 +49,18 @@ namespace FanSoftStore
             //USANDO PAGINAS E CONTROLLERS
             app.UseMvcWithDefaultRoute();
 
+            //THIS IS FOR GET STATIC FILES ( EXAMPLES .css, .js, ...)
+            app.UseStaticFiles();
+
+            //USE STATIC FILES INSTALLED BY NPM
+            //SET BY PARAMETER CONTENT ROOT PATH WHERE YOUR APPLICATION ARE IN
+            app.UseNodeModules(env.ContentRootPath);
+
+            //IF GET HERE THE FILE IS NOT FOUND, SO
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                context.Response.StatusCode = 404;
+                await context.Response.WriteAsync("Resource not found");
             });
         }
     }

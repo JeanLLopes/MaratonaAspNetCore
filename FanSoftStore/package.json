@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "name": "fansoftstore",
+  "private": true,
+  "devDependencies": {
+  },
+  "description": "A example soluction with asp.net core",
+  "author": "Jean Lopes",
+  "dependencies": {
+    "bootstrap": "4.0.0",
+    "jquery": "3.3.1"
+  }
+
+}
