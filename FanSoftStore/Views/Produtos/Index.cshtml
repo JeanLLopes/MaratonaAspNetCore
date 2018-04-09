@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<ProdutoModel>
+@{
     ViewBag.Title = "Listagem de Produtos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -22,7 +23,7 @@
         {
             <tr>
                 <td>@item.Nome</td>
-                <td>@item.Tipo</td>
+                <td>@item.Tipo.Nome</td>
                 <td>@item.Valor</td>
             </tr>
 

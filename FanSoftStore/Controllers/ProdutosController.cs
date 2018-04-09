@@ -1,6 +1,7 @@
 ﻿using FanSoftStore.UI.Data;
 using FanSoftStore.UI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,8 @@ namespace FanSoftStore.UI.Controllers
         public IActionResult Index()
         {
             //LIST DATA TO DATABASE IN TABLE "PRODUTOS"
-            var model = _dataContext.Produtos.ToList();
+            //ADD TIPO DE PRODUTO
+            var model = _dataContext.Produtos.Include(x => x.Tipo).ToList();
             return View(model);
         }
     }
