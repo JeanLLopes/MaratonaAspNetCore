@@ -51,11 +51,22 @@ namespace FanSoftStore.UI.Controllers
         [HttpPost]
         public IActionResult AddEdit(ProdutoModel produtoModel)
         {
-            //ADD IN DATABASE
-            _dataContext.Add(produtoModel);
-            _dataContext.SaveChanges();
 
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                //ADD IN DATABASE
+                _dataContext.Add(produtoModel);
+                _dataContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            //GET A LIST OF PRODUCTS
+            //x => new { x.Id, x.Nome } //SELECT ONLY SOME DATAS USING "SelectListItem"
+            //GENERATE A SELECTLIST WITH SelectListItem
+            var tipos = _dataContext.TipoProdutos.ToList().Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Nome });
+            ViewBag.Tipo = tipos;
+            return View(produtoModel);
+            
         }
     }
 }

@@ -11,12 +11,15 @@ namespace FanSoftStore.UI.Models
     public class ProdutoModel : EntityModel
     {
         [Column(TypeName = "varchar(100)")]
-        [Required]
+        [Required(ErrorMessage ="Campo Obrigatório")]
         public string Nome { get; set; }
 
+        [Required(ErrorMessage = "Campo Obrigatório")]
         public int TipoProdutoId { get; set; }
 
         [Column(TypeName = "money")]
+        [Required(ErrorMessage = "Campo Obrigatório")]
+
         public decimal Valor { get; set; }
 
 
@@ -25,6 +28,7 @@ namespace FanSoftStore.UI.Models
         public TipoProdutoModel Tipo { get; set; }
 
         [Column(TypeName ="varchar(300)")]
+        [StringLength(300,ErrorMessage = "Máximo de 300 caracteres")]
         public string Descricao { get; set; }
     }
 }

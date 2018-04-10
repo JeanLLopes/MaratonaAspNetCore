@@ -32,9 +32,38 @@
             <td>@item.Tipo.Nome</td>
             <td>@item.Valor.ToString("N2")</td>
             <td><a asp-action="AddEdit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Editar</a></td>
-            <td><a asp-action="AddEdit" class="btn btn-danger btn-sm">Deletar</a></td>
+            <td><button class="btn btn-danger btn-sm" onclick="Excluir('@item.Id', '@item.Nome')">Deletar</button></td>
         </tr>
-
         }
     </tbody>
 </table>
+
+<div class="modal" tabindex="-1" role="dialog" id="del-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Exclusão</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Deseja realmente excluir o item <strong><span id="nome-item"></span></strong>&nbsp;?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Sim</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scriptJavascript{
+<script>
+    function Excluir(id, nome) {
+        $('#nome-item').text(nome);
+        $('#del-modal').modal("show");
+    }
+
+</script>
+}
