@@ -23,5 +23,6 @@ namespace FanSoftStore.UI.Data
 
         //MAP THE TABLE
         public DbSet<ProdutoModel> Produtos { get; set; }
+        public DbSet<TipoProdutoModel> TipoProdutos { get; set; }
     }
 }

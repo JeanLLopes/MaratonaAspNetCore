@@ -23,5 +23,8 @@ namespace FanSoftStore.UI.Models
         //CREATE A FOREING KEY
         [ForeignKey("TipoProdutoId")]
         public TipoProdutoModel Tipo { get; set; }
+
+        [Column(TypeName ="varchar(300)")]
+        public string Descricao { get; set; }
     }
 }

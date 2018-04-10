@@ -15,6 +15,8 @@
             <th>Nome</th>
             <th>Tipo</th>
             <th>Valor</th>
+            <th>Editar</th>
+            <th>Deletar</th>
         </tr>
     </thead>
     <tbody>
@@ -25,11 +27,13 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.Nome</td>
-                <td>@item.Tipo.Nome</td>
-                <td>@item.Valor.ToString("N2")</td>
-            </tr>
+        <tr>
+            <td>@item.Nome</td>
+            <td>@item.Tipo.Nome</td>
+            <td>@item.Valor.ToString("N2")</td>
+            <td><a asp-action="AddEdit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Editar</a></td>
+            <td><a asp-action="AddEdit" class="btn btn-danger btn-sm">Deletar</a></td>
+        </tr>
 
         }
     </tbody>
