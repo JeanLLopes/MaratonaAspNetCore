@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -67,6 +69,30 @@ namespace FanSoftStore.UI.Controllers
             ViewBag.Tipo = tipos;
             return View(produtoModel);
             
+        }
+
+
+        [HttpDelete]
+        public IActionResult Excluir(int id)
+        {
+            try
+            {
+                var produto = _dataContext.Produtos.Find(id);
+
+                if (produto != null)
+                {
+                    _dataContext.Produtos.Remove(produto);
+                    _dataContext.SaveChanges();
+
+                    Response.StatusCode = (int)HttpStatusCode.OK;
+                    return Json(string.Format("{0} removido com sucesso", produto.Nome.ToUpper()));
+                }
+                return NotFound("produto não encontrado");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

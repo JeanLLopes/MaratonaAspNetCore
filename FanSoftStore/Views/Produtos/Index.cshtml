@@ -27,7 +27,7 @@
 
         @foreach (var item in Model)
         {
-        <tr>
+        <tr id="item-@item.Id">
             <td>@item.Nome</td>
             <td>@item.Tipo.Nome</td>
             <td>@item.Valor.ToString("N2")</td>
@@ -38,7 +38,7 @@
     </tbody>
 </table>
 
-<div class="modal" tabindex="-1" role="dialog" id="del-modal">
+<div data-delete-id="" class="modal" tabindex="-1" role="dialog" id="del-modal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -51,7 +51,7 @@
                 <p>Deseja realmente excluir o item <strong><span id="nome-item"></span></strong>&nbsp;?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Sim</button>
+                <button type="button" class="btn btn-primary" onclick="ExcluirProduto()">Sim</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
@@ -62,8 +62,33 @@
 <script>
     function Excluir(id, nome) {
         $('#nome-item').text(nome);
-        $('#del-modal').modal("show");
+        $('#del-modal').data('deleteId', id).modal("show");
     }
 
+
+    //VIA AJAX VAMOS NO SERVIDOR EFETUAR AS ALTERAÇÕES 
+    function ExcluirProduto() {
+        debugger;
+        var _id = $('#del-modal').data('deleteId')
+        var _url = '@Url.Action("Excluir")';
+
+        //FAZEMOS O AJAX    
+        $.ajax({
+            url: _url,
+            dataType: 'json',
+            type: 'delete',
+            data: { id: _id },
+            success: function (data) {
+                toastr.success(data, 'FanSoft')
+            },
+            error: function (data) {
+                toastr.error(data.responseText, 'FanSoft');
+            },
+            complete: function (data) {
+                $('#del-modal').modal("hide");
+                $('#item-' + _id).remove();
+            }
+        })
+    }
 </script>
 }
