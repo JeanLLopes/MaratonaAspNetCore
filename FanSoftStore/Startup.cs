@@ -56,6 +56,13 @@ namespace FanSoftStore
                 DbInitializer.InitDb(ctx);
             }
 
+
+            //TAMBEM PARA ADICIONAR AUTENTICAÇÃO VAMOS ADICIONAR UM ITEM EM NOSSO PIPELINE
+            //ESSE CARA DEVE ESTAR ANTES DO "app.UseMvcWithDefaultRoute();"
+            app.UseAuthentication();
+
+
+
             //DICIONA A ROTA PADRÃO DO SISTEMA
             //USANDO PAGINAS E CONTROLLERS
             app.UseMvcWithDefaultRoute();
@@ -74,9 +81,6 @@ namespace FanSoftStore
                 await context.Response.WriteAsync("Resource not found");
             });
 
-
-            //TAMBEM PARA ADICIONAR AUTENTICAÇÃO VAMOS ADICIONAR UM ITEM EM NOSSO PIPELINE
-            app.UseAuthentication();
         }
     }
 }
