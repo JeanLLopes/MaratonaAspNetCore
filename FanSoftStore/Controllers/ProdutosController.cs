@@ -1,5 +1,6 @@
 ﻿using FanSoftStore.UI.Data;
 using FanSoftStore.UI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace FanSoftStore.UI.Controllers
 {
+    [Authorize]
     public class ProdutosController : Controller
     {
         private readonly DataContext _dataContext;

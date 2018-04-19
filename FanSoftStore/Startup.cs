@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FanSoftStore.UI.Data;
 using FanSoftStore.UI.Infra;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,6 +18,16 @@ namespace FanSoftStore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //ADICIONAMOS A AUTENTICAÇÃO
+            //USANDO AUTENTICAÇÃO VIA COOKIE
+            //DEFINIMOS AS PAGINAS DE LOGIN E LOGOUT
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
+            {
+                x.LoginPath = "/Conta/Login";
+                x.LogoutPath = "/Conta/Logout";
+            });
+
+
             //ADICIONA O PIPELINE DO MVC 
             services.AddMvc();
 
@@ -62,6 +73,10 @@ namespace FanSoftStore
                 context.Response.StatusCode = 404;
                 await context.Response.WriteAsync("Resource not found");
             });
+
+
+            //TAMBEM PARA ADICIONAR AUTENTICAÇÃO VAMOS ADICIONAR UM ITEM EM NOSSO PIPELINE
+            app.UseAuthentication();
         }
     }
 }

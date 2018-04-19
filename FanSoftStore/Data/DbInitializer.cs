@@ -1,4 +1,5 @@
-﻿using FanSoftStore.UI.Models;
+﻿using FanSoftStore.UI.Infra;
+using FanSoftStore.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,16 @@ namespace FanSoftStore.UI.Data
                 dataContext.AddRange(model);
 
                 //SAVE DATA IN DATABASE
+                dataContext.SaveChanges();
+            }
+
+
+            if (!dataContext.Usuarios.Any())
+            {
+                dataContext.Usuarios.AddRange(new List<UsuarioModel>
+                {
+                    new UsuarioModel{ Nome= "Teste", Email = "teste@gmail.com", DataCriacao= DateTime.Now, Senha= "123456".Encrypt()}
+                });
                 dataContext.SaveChanges();
             }
         }
